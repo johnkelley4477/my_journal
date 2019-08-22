@@ -19,19 +19,19 @@
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
-            android:id="@+id/userText" android:hint="Username" android:textAlignment="center"/>
+            android:id="@+id/regUserText" android:hint="Username" android:textAlignment="center"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/passwordText" android:textAlignment="center" android:hint="Paasword"/>
+            android:id="@+id/regPasswordText" android:textAlignment="center" android:hint="Paasword"/>
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:ems="10"
-            android:id="@+id/confirmPasswordText" android:textAlignment="center" android:hint="Confirm Paasword"/>
+            android:id="@+id/regConfirmPasswordText" android:textAlignment="center" android:hint="Confirm Paasword"/>
     <Button
             android:text="Register"
             android:layout_width="match_parent"
