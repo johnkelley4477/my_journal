@@ -1,12 +1,13 @@
 package com.example.myjournal
 
 import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+//import android.support.v7.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
@@ -37,7 +38,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        setSupportActionBar(toolbar)
+       // setSupportActionBar(toolbar)
 
         //ToDo relocate this if possible
         auth = FirebaseAuth.getInstance()
@@ -61,10 +62,10 @@ class MainActivity : AppCompatActivity() {
            entry.saveEntry(dateTextName,tagsTextName,entryTextName,this@MainActivity)
         }
         login.setOnClickListener {
-            loginHandler.login(entryView,loginView,this@MainActivity)
+            loginHandler.login(entryView,loginView)
         }
         loginReg.setOnClickListener{
-            loginHandler.login(regView, loginView, this@MainActivity)
+            loginHandler.login(regView, loginView)
         }
     }
 

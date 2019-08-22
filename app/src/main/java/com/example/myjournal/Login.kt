@@ -5,7 +5,7 @@ import android.view.View
 
 class Login (){
 
-    fun login(entryView: View, loginView: View, context: Context){
+    fun login(entryView: View, loginView: View){
         entryView.setVisibility(View.VISIBLE)
         loginView.setVisibility(View.GONE)
     }
