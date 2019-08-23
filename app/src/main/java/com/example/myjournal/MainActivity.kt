@@ -1,10 +1,8 @@
 package com.example.myjournal
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
@@ -19,9 +17,6 @@ class MainActivity : AppCompatActivity() {
     lateinit var tagsTextName: EditText
     lateinit var entryTextName: EditText
     lateinit var saveButton: Button
-    lateinit var entryView: View
-    lateinit var loginView: View
-    lateinit var regView: View
     private lateinit var auth: FirebaseAuth
     val simpleFormat = DateTimeFormatter.ofPattern("M/d/yy")
 
@@ -34,9 +29,6 @@ class MainActivity : AppCompatActivity() {
         tagsTextName = findViewById(R.id.tagsText)
         entryTextName = findViewById(R.id.entryText)
         saveButton = findViewById(R.id.saveButton)
-        regView = findViewById(R.id.regView)
-        entryView = findViewById(R.id.entryView)
-        loginView = findViewById(R.id.loginView)
 
         val today = LocalDateTime.now()
         val formatted = today.format(simpleFormat)
