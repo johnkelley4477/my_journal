@@ -14,9 +14,11 @@ class Entry() {
         val tags = if(tag.isEmpty()) null else tag.split(" ")
         if(dateString.isEmpty()){
             dateTextName.error = "Please enter a date mm/dd/yy"
+            dateTextName.requestFocus()
             return
         }else if(entry.isEmpty()){
             entryTextName.error = "Please enter a journal entry"
+            entryTextName.requestFocus()
             return
         }
         val ref = FirebaseDatabase.getInstance().getReference("entry")
