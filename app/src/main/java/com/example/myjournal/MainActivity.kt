@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 
-import kotlinx.android.synthetic.main.activity_main.*
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 
@@ -21,13 +20,11 @@ class MainActivity : AppCompatActivity() {
     lateinit var tagsTextName: EditText
     lateinit var entryTextName: EditText
     lateinit var saveButton: Button
-    lateinit var login: Button
-    lateinit var loginReg: Button
+//    lateinit var login: Button
+//    lateinit var loginReg: Button
     lateinit var entryView: View
     lateinit var loginView: View
     lateinit var regView: View
-
-    val loginHandler = Login()
 
     val simpleFormat = DateTimeFormatter.ofPattern("M/d/yy")
 
@@ -47,8 +44,8 @@ class MainActivity : AppCompatActivity() {
         tagsTextName = findViewById(R.id.tagsText)
         entryTextName = findViewById(R.id.entryText)
         saveButton = findViewById(R.id.saveButton)
-        login = findViewById(R.id.loginButton)
-        loginReg = findViewById(R.id.loginRegisterButton)
+//        login = findViewById(R.id.loginButton)
+//        loginReg = findViewById(R.id.loginRegisterButton)
         regView = findViewById(R.id.regView)
         entryView = findViewById(R.id.entryView)
         loginView = findViewById(R.id.loginView)
@@ -61,12 +58,12 @@ class MainActivity : AppCompatActivity() {
            val entry = Entry()
            entry.saveEntry(dateTextName,tagsTextName,entryTextName,this@MainActivity)
         }
-        login.setOnClickListener {
-            loginHandler.login(entryView,loginView)
-        }
-        loginReg.setOnClickListener{
-            loginHandler.login(regView, loginView)
-        }
+//        login.setOnClickListener {
+//            loginHandler.login(entryView,loginView)
+//        }
+//        loginReg.setOnClickListener{
+//            loginHandler.login(regView, loginView)
+//        }
     }
 
     //ToDo relocate this if possible
