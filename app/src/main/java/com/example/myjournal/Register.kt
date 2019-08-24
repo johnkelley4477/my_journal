@@ -2,6 +2,7 @@ package com.example.myjournal
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
@@ -15,6 +16,8 @@ class Register: AppCompatActivity() {
     private lateinit var regConfirmPasswordText: EditText
     private lateinit var regButton: Button
     private lateinit var auth: FirebaseAuth
+    private val TAG: String = "Registration"
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_main)
@@ -55,16 +58,27 @@ class Register: AppCompatActivity() {
             regConfirmPasswordText.requestFocus()
             return
         }
+        Log.d(TAG, "made it here.")
         auth.createUserWithEmailAndPassword(regUserText.text.toString(), regPasswordText.text.toString())
             .addOnCompleteListener(this) { task ->
                 if (task.isSuccessful) {
+                    Log.d(TAG, "Successful")
                     Toast.makeText(this, "Authentication was successful.",
                         Toast.LENGTH_SHORT).show()
-                    startActivity(Intent(this,MainActivity::class.java))
-                    finish()
+                    val user = auth.currentUser
+
+                    user?.sendEmailVerification()
+                        ?.addOnCompleteListener { task ->
+                            if (task.isSuccessful) {
+                                startActivity(Intent(this,MainActivity::class.java))
+                                finish()
+                                Log.d(TAG, "Email sent.")
+                            }
+                        }
                 } else {
                     Toast.makeText(this, "Authentication failed.",
                         Toast.LENGTH_SHORT).show()
+                    Log.e(TAG, "Failed to register " + task)
                 }
             }
     }
