@@ -7,7 +7,7 @@ import com.google.firebase.database.FirebaseDatabase
 
 class Entry() {
 
-    fun saveEntry(dateTextName: EditText, tagsTextName: EditText, entryTextName:EditText, context: Context){
+    fun saveEntry(dateTextName: EditText, tagsTextName: EditText, entryTextName:EditText, context: Context,currentUser: String){
         val dateString = dateTextName.text.toString().trim()
         val tag = tagsTextName.text.toString().trim()
         val entry = entryTextName.text.toString().trim()
@@ -21,7 +21,7 @@ class Entry() {
             entryTextName.requestFocus()
             return
         }
-        val ref = FirebaseDatabase.getInstance().getReference("entry")
+        val ref = FirebaseDatabase.getInstance().getReference("$currentUser/entry")
         val id = ref.push().key
         val journalEntry = JournalEntry(id!!,getISODate(dateString),entry,tags)
 

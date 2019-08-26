@@ -69,9 +69,6 @@ class Login: AppCompatActivity(){
     }
 
     fun userState(currentUser: FirebaseUser?){
-        //Todo remove this Logging
-        Log.d(TAG,"current user is: " + currentUser)
-
         if(currentUser != null){
             if(currentUser.isEmailVerified) {
                 startActivity(Intent(this, MainActivity::class.java))
