@@ -71,7 +71,7 @@ class Login: AppCompatActivity(){
     fun userState(currentUser: FirebaseUser?){
         if(currentUser != null){
             if(currentUser.isEmailVerified) {
-                startActivity(Intent(this, MainActivity::class.java))
+                startActivity(Intent(this, JournalList::class.java))
                 finish()
             }else{
                 Toast.makeText(baseContext, "Please verify your email address",
