@@ -22,12 +22,6 @@
     <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="date"
-            android:ems="10"
-            android:id="@+id/dateText" android:hint="Today's Date"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:ems="10"
             android:id="@+id/tagsText" android:hint="Tags"/>
