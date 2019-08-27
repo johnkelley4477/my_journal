@@ -5,4 +5,8 @@ class JournalEntry (
     val date: String,
     val entry: String,
     val tags: List<String>?
-)
+){
+    constructor(): this("","","",null)
+
+
+}
