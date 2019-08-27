@@ -7,4 +7,6 @@ class JournalEntry (
     val tags: List<String>?
 ){
     constructor(): this("","","",null)
+
+
 }

@@ -70,6 +70,7 @@ class Login: AppCompatActivity(){
 
     fun userState(currentUser: FirebaseUser?){
         if(currentUser != null){
+
             if(currentUser.isEmailVerified) {
                 startActivity(Intent(this, JournalList::class.java))
                 finish()

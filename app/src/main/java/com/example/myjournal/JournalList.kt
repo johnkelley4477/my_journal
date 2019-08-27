@@ -13,6 +13,7 @@ class JournalList: AppCompatActivity() {
     lateinit var ref: DatabaseReference
     lateinit var journalEntryList: MutableList<JournalEntry>
     lateinit var listView: ListView
+    val TAG: String = "JournalList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,20 +31,20 @@ class JournalList: AppCompatActivity() {
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
-
                 override fun onDataChange(p0: DataSnapshot) {
+
                     if (p0!!.exists()) {
                         for (j in p0.children) {
                             val journalEntry = j.getValue(JournalEntry::class.java)
                             journalEntryList.add(journalEntry!!)
                         }
-
-                        val adapter = ListAdapter(applicationContext, R.id.list_main, journalEntryList)
+                        val adapter = ListAdapter(applicationContext, R.layout.journal_entry, journalEntryList)
                         listView.adapter = adapter
                     }
                 }
             })
         }else{
+            Log.e(TAG,"no data")
             Toast.makeText(this,"This is a test. Not user info found",Toast.LENGTH_LONG)
         }
     }
