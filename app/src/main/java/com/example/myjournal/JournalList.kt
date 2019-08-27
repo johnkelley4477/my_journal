@@ -32,7 +32,6 @@ class JournalList: AppCompatActivity() {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
                 override fun onDataChange(p0: DataSnapshot) {
-
                     if (p0!!.exists()) {
                         for (j in p0.children) {
                             val journalEntry = j.getValue(JournalEntry::class.java)
