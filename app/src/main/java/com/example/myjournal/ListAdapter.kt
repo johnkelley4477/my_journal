@@ -17,32 +17,12 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
         val textViewDate = view.findViewById<TextView>(R.id.textViewDate)
         val textViewTime = view.findViewById<TextView>(R.id.textViewTime)
         val textViewTags = view.findViewById<TextView>(R.id.textViewTags)
-        val textViewUpdate = view.findViewById<TextView>(R.id.textViewUpdate)
         val journalEntry = journalList[position]
         textViewDate.text = getFormatedDate(journalEntry.date)
         textViewTime.text = getFormatedTime(journalEntry.date)
         textViewTags.text = getFormatedTags(journalEntry.tags)
 
         return view
-    }
-
-    fun showUpdateDialog(){
-        val builder = AlertDialog.Builder(mCtx)
-        val inflater = LayoutInflater.from(mCtx)
-        val view = inflater.inflate(R.layout.layout_update_entry,  null)
-        val editTextTags = view.findViewById<EditText>(R.id.tagsDialogText)
-        val editTextEntry = view.findViewById<EditText>(R.id.entryDialogText)
-        builder.setTitle("Update your entry")
-        builder.setView(view)
-        builder.setNegativeButton("No") {p0,P1 ->
-        }
-
-        builder.setPositiveButton("Update") {p0,P1 ->
-
-        }
-
-        val alert = builder.create()
-        alert.show()
     }
 
     fun getFormatedDate(date: String): String{

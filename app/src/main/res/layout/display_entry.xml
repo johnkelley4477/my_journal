@@ -1,23 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical" android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
         android:layout_height="match_parent">
     <TextView
-            android:id="@+id/textShowDate"
-            android:textSize="24dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Date" />
-    <TextView
-            android:id="@+id/textShowTags"
-            android:textSize="24dp"
+            android:textSize="30dp"
+            android:textAlignment="textEnd"
+            android:text = "Update"
+            android:id="@+id/updateButton"/>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Tags" />
-    <TextView
-            android:id="@+id/textShowEntry"
-            android:textSize="24dp"
+            android:layout_height="match_parent"
+            android:id="@+id/textViews">
+        <TextView
+                android:id="@+id/textShowDate"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+        <TextView
+                android:id="@+id/textShowTags"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tags" />
+        <TextView
+                android:id="@+id/textShowEntry"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entry" />
+    </LinearLayout>
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Entry" />
+            android:layout_height="match_parent"
+            android:id="@+id/textEdits">
+        <TextView
+                android:id="@+id/textEditDate"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Date" />
+        <TextView
+                android:id="@+id/textEditTags"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tags" />
+        <TextView
+                android:id="@+id/textEditEntry"
+                android:textSize="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Entry" />
+    </LinearLayout>
 </LinearLayout>
