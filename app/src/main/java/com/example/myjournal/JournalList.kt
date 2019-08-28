@@ -1,5 +1,6 @@
 package com.example.myjournal
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.ListView
@@ -7,6 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import java.util.ArrayList
 
 class JournalList: AppCompatActivity() {
 
@@ -35,11 +37,24 @@ class JournalList: AppCompatActivity() {
                     journalEntryList.clear()
                     if (p0!!.exists()) {
                         for (j in p0.children) {
-                            val journalEntry = j.getValue(JournalEntry::class.java)
+                            var journalEntry = j.getValue(JournalEntry::class.java)
                             journalEntryList.add(journalEntry!!)
                         }
-                        val adapter = ListAdapter(applicationContext, R.layout.journal_entry, journalEntryList)
+                        val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryList)
                         listView.adapter = adapter
+                        listView.setOnItemClickListener{adapterView, view, position: Int, id: Long ->
+                            var intent = Intent(this@JournalList, DisplayJournalEntry::class.java)
+                            var arrayItems = ArrayList<String>()
+                            arrayItems.add(journalEntryList[position].id)
+                            arrayItems.add(journalEntryList[position].date)
+                            arrayItems.add(journalEntryList[position].tags.toString())
+                            arrayItems.add(journalEntryList[position].entry)
+                            Log.d(TAG,"journalEntryList at click ${arrayItems}")
+                            intent.putExtra("jEntry",arrayItems)
+                            startActivity(intent)
+                            //finish()
+
+                        }
                     }
                 }
             })
