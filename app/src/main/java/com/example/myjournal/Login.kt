@@ -72,7 +72,7 @@ class Login: AppCompatActivity(){
         if(currentUser != null){
 
             if(currentUser.isEmailVerified) {
-                startActivity(Intent(this, JournalList::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }else{
                 Toast.makeText(baseContext, "Please verify your email address",

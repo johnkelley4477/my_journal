@@ -1,5 +1,6 @@
 package com.example.myjournal
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -13,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tagsTextName: EditText
     lateinit var entryTextName: EditText
     lateinit var saveButton: Button
+    lateinit var listButton: Button
     lateinit var currentUserId: String
     val TAG: String = "Main"
     private lateinit var auth: FirebaseAuth
@@ -24,10 +26,14 @@ class MainActivity : AppCompatActivity() {
         tagsTextName = findViewById(R.id.tagsText)
         entryTextName = findViewById(R.id.entryText)
         saveButton = findViewById(R.id.saveButton)
-
+        listButton = findViewById(R.id.listButton)
         saveButton.setOnClickListener {
             val entry = Entry()
             entry.saveEntry(tagsTextName, entryTextName, this@MainActivity,currentUserId)
+            startActivity(Intent(this, JournalList::class.java))
+        }
+        listButton.setOnClickListener{
+            startActivity(Intent(this, JournalList::class.java))
         }
     }
 
