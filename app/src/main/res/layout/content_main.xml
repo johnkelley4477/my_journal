@@ -32,14 +32,30 @@
             android:gravity="start|top"
             android:ems="10"
             android:id="@+id/entryText" android:hint="Journal Entry"/>
-    <Button
-            android:text="SAVE"
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/saveButton" android:backgroundTint="#3F51B5"
-            android:textColor="@color/common_google_signin_btn_text_dark_default"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp">
+    <Button
+            android:drawableEnd="@android:drawable/ic_menu_save"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:background="@drawable/rounded_corner_green"
+            android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
+            android:padding="13dp"
+            android:id="@+id/saveButton"/>
     <Button
             android:text="Go To List"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/listButton" android:backgroundTint="#00bb00"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginRight="10dp"
+            android:drawableEnd="@android:drawable/ic_menu_agenda"
+            android:background="@drawable/rounded_corner_blue"
+            android:id="@+id/listButton"
+            android:padding="15dp"
+            android:layout_alignParentRight="true"
             android:textColor="@color/common_google_signin_btn_text_dark_default"/>
+    </RelativeLayout>
 </LinearLayout>
