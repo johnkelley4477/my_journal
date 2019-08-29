@@ -8,7 +8,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import java.util.ArrayList
 
 class JournalList: AppCompatActivity() {
 
@@ -44,16 +43,8 @@ class JournalList: AppCompatActivity() {
                         listView.adapter = adapter
                         listView.setOnItemClickListener{adapterView, view, position: Int, id: Long ->
                             var intent = Intent(this@JournalList, DisplayJournalEntry::class.java)
-                            var arrayItems = ArrayList<String>()
-                            arrayItems.add(journalEntryList[position].id)
-                            arrayItems.add(journalEntryList[position].date)
-                            arrayItems.add(journalEntryList[position].tags.toString())
-                            arrayItems.add(journalEntryList[position].entry)
-                            Log.d(TAG,"journalEntryList at click ${arrayItems}")
-                            intent.putExtra("jEntry",arrayItems)
+                            intent.putExtra("id",journalEntryList[position].id)
                             startActivity(intent)
-                            //finish()
-
                         }
                     }
                 }
