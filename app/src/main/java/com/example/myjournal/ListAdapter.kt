@@ -1,10 +1,13 @@
 package com.example.myjournal
 
+import android.app.AlertDialog
 import android.content.Context
+import android.content.DialogInterface
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.EditText
 import android.widget.TextView
 
 class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List<JournalEntry>): ArrayAdapter<JournalEntry>(mCtx,layoutResId,journalList) {
@@ -18,6 +21,7 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
         textViewDate.text = getFormatedDate(journalEntry.date)
         textViewTime.text = getFormatedTime(journalEntry.date)
         textViewTags.text = getFormatedTags(journalEntry.tags)
+
         return view
     }
 

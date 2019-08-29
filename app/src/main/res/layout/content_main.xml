@@ -37,5 +37,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" android:id="@+id/saveButton" android:backgroundTint="#3F51B5"
             android:textColor="@color/common_google_signin_btn_text_dark_default"/>
-
+    <Button
+            android:text="Go To List"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" android:id="@+id/listButton" android:backgroundTint="#00bb00"
+            android:textColor="@color/common_google_signin_btn_text_dark_default"/>
 </LinearLayout>
