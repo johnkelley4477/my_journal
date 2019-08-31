@@ -16,13 +16,15 @@
                 android:layout_height="wrap_content"
                 android:textAlignment="center"
                 android:text="Date" />
-        <TextView
-                android:id="@+id/textShowTags"
-                android:textSize="24dp"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:text="Tags" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/tagsLayout">
+        </LinearLayout>
         <TextView
                 android:id="@+id/textShowEntry"
                 android:textColor="#000"
