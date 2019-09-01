@@ -36,9 +36,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="10dp"
-            android:gravity="center"
-            android:id="@+id/desc">
+            android:layout_marginTop="10dp">
+        <TextView
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="TextView"
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="24dp"
+                android:textAlignment="textStart"
+                android:id="@+id/desc"/>
     </LinearLayout>
 
 </LinearLayout>

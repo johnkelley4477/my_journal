@@ -16,9 +16,16 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
         val view: View = layoutInflater.inflate(layoutResId, null)
         val textViewDate = view.findViewById<TextView>(R.id.textViewDate)
         val textViewTime = view.findViewById<TextView>(R.id.textViewTime)
+        val textViewDesc = view.findViewById<TextView>(R.id.desc)
         val journalEntry = journalList[position]
         textViewDate.text = getFormatedDate(journalEntry.date)
         textViewTime.text = getFormatedTime(journalEntry.date)
+        if (journalEntry.entry.length < 50) {
+            textViewDesc.text = journalEntry.entry
+        }else{
+            textViewDesc.text = "${journalEntry.entry.substring(0,47)}..."
+        }
+
         var tagLayout = view.findViewById<LinearLayout>(R.id.layoutTags)
         for(tag in journalEntry.tags!!){
             val layoutInflater: LayoutInflater = LayoutInflater.from(mCtx)
@@ -32,7 +39,7 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
             //textView.background = Drawable.(R.drawable.rounded_corner_green)
             textView.layoutParams = layoutParamss
             textView.text = tag
-            textView.textSize = 9F
+            textView.textSize = 12F
             tagLayout?.addView(tagView)
         }
 
