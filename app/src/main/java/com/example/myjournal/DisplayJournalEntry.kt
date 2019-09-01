@@ -5,10 +5,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
 import android.widget.EditText
+import android.widget.LinearLayout
+import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -27,6 +33,8 @@ class DisplayJournalEntry: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.display_entry)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         builder = AlertDialog.Builder(this)
@@ -46,10 +54,10 @@ class DisplayJournalEntry: AppCompatActivity() {
                         map.set(j.key.toString(),j.value.toString())
                     }
                     date = findViewById(R.id.textShowDate)
-                    tags = findViewById(R.id.textShowTags)
                     entry = findViewById(R.id.textShowEntry)
                     update = findViewById(R.id.updateButton)
                     delete = findViewById(R.id.deleteButton)
+                    var tagLayout = findViewById<LinearLayout>(R.id.tagsLayout)
                     update.setOnClickListener{
                         showUpdateDialog(map)
                     }
@@ -57,8 +65,24 @@ class DisplayJournalEntry: AppCompatActivity() {
                         showDeleteDialog(map)
                     }
                     date.text = getFormatedDate(map.get("date")!!) + " " + getFormatedTime(map.get("date")!!)
-                    tags.text = map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).replace(",", "")
+                    //tags.text = map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).replace(",", "")
                     entry.text = map.get("entry")!!
+                    var i = 0
+                    for(tag in map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).split(",")){
+                        val layoutInflater: LayoutInflater = LayoutInflater.from(this@DisplayJournalEntry)
+                        var view: View = layoutInflater.inflate(R.layout.tag_text, null)
+                        val textView = view.findViewById<TextView>(R.id.tag_text)
+                        val layoutParamss = LayoutParams(
+                            LayoutParams.WRAP_CONTENT, // This will define text view width
+                            LayoutParams.WRAP_CONTENT // This will define text view height
+                        )
+                        layoutParamss.setMargins(10,10,10,10)
+                        //textView.background = Drawable.(R.drawable.rounded_corner_green)
+                        textView.layoutParams = layoutParamss
+                        textView.text = tag
+                        tagLayout?.addView(view)
+                        ++i
+                    }
                 }
             })
         }else{
@@ -113,6 +137,29 @@ class DisplayJournalEntry: AppCompatActivity() {
 
         val alert = builder.create()
         alert.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.list -> {
+                startActivity(Intent(this, JournalList::class.java))
+                true
+            }
+            R.id.search -> {
+                true
+            }
+            R.id.logout -> {
+                auth.signOut()
+                startActivity(Intent(this, Login::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     //ToDo create a helper class with these

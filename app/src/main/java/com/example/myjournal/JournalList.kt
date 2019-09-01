@@ -3,9 +3,12 @@ package com.example.myjournal
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
@@ -14,12 +17,15 @@ class JournalList: AppCompatActivity() {
     lateinit var ref: DatabaseReference
     lateinit var journalEntryList: MutableList<JournalEntry>
     lateinit var listView: ListView
+    lateinit var auth: FirebaseAuth
     val TAG: String = "JournalList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lists_main)
-        val auth = FirebaseAuth.getInstance()
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
+        auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         if(currentUser != null) {
             journalEntryList = mutableListOf()
@@ -52,6 +58,30 @@ class JournalList: AppCompatActivity() {
         }else{
             Log.e(TAG,"no data")
             Toast.makeText(this,"This is a test. Not user info found",Toast.LENGTH_LONG)
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        menu.removeItem(R.id.list)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.list -> {
+                startActivity(Intent(this, JournalList::class.java))
+                true
+            }
+            R.id.search -> {
+                true
+            }
+            R.id.logout -> {
+                auth.signOut()
+                startActivity(Intent(this, Login::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

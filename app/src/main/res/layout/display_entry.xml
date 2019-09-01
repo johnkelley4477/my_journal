@@ -1,47 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-    <TextView
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textSize="24dp"
-            android:textAlignment="textEnd"
-            android:text = "Update"
-            android:textColor="#0000ff"
-            android:id="@+id/updateButton"/>
+    <include layout="@layout/toolbar"
+            android:id="@+id/toolbar"/>
     <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViews"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="60dp">
         <TextView
                 android:id="@+id/textShowDate"
                 android:textSize="24dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textAlignment="center"
                 android:text="Date" />
-        <TextView
-                android:id="@+id/textShowTags"
-                android:textSize="24dp"
+        <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Tags" />
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="15dp"
+                android:layout_marginTop="15dp"
+                android:id="@+id/tagsLayout">
+        </LinearLayout>
         <TextView
                 android:id="@+id/textShowEntry"
-                android:textSize="24dp"
+                android:textColor="#000"
+                android:textSize="18dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:padding="5dp"
                 android:text="Entry" />
     </LinearLayout>
-    <TextView
+    <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:textSize="24dp"
-            android:textAlignment="textEnd"
-            android:textColor="#ff0000"
-            android:text = "Delete"
-            android:id="@+id/deleteButton"/>
-</LinearLayout>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="20dp">
+        <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_alignParentLeft="true"
+                android:padding="15dp"
+                android:layout_marginLeft="10dp"
+                android:textColor="#0000ff"
+                android:background="@drawable/rounded_corner_green"
+                android:drawableEnd="@android:drawable/ic_menu_add"
+                android:id="@+id/updateButton"/>
+        <TextView
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:layout_marginRight="10dp"
+                android:padding="15dp"
+                android:layout_alignParentRight="true"
+                android:background="@drawable/rounded_corner_red"
+                android:drawableEnd="@android:drawable/ic_menu_delete"
+                android:id="@+id/deleteButton"/>
+        </RelativeLayout>
+</RelativeLayout>
