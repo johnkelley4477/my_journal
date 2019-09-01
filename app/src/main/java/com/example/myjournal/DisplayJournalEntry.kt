@@ -5,6 +5,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
@@ -135,6 +137,29 @@ class DisplayJournalEntry: AppCompatActivity() {
 
         val alert = builder.create()
         alert.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_main, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.list -> {
+                startActivity(Intent(this, JournalList::class.java))
+                true
+            }
+            R.id.search -> {
+                true
+            }
+            R.id.logout -> {
+                auth.signOut()
+                startActivity(Intent(this, Login::class.java))
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
     //ToDo create a helper class with these

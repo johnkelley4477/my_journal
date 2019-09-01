@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var tagsTextName: EditText
     lateinit var entryTextName: EditText
     lateinit var saveButton: Button
-    lateinit var listButton: Button
+//    lateinit var listButton: Button
     lateinit var currentUserId: String
     val TAG: String = "Main"
     private lateinit var auth: FirebaseAuth
@@ -30,15 +30,15 @@ class MainActivity : AppCompatActivity() {
         tagsTextName = findViewById(R.id.tagsText)
         entryTextName = findViewById(R.id.entryText)
         saveButton = findViewById(R.id.saveButton)
-        listButton = findViewById(R.id.listButton)
+//        listButton = findViewById(R.id.listButton)
         saveButton.setOnClickListener {
             val entry = Entry()
             entry.saveEntry(tagsTextName, entryTextName, this@MainActivity,currentUserId)
             startActivity(Intent(this, JournalList::class.java))
         }
-        listButton.setOnClickListener{
-            startActivity(Intent(this, JournalList::class.java))
-        }
+//        listButton.setOnClickListener{
+//            startActivity(Intent(this, JournalList::class.java))
+//        }
     }
 
     public override fun onStart() {
@@ -57,7 +57,18 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_settings -> true
+            R.id.list -> {
+                startActivity(Intent(this, JournalList::class.java))
+                true
+            }
+            R.id.search -> {
+                true
+            }
+            R.id.logout -> {
+                auth.signOut()
+                startActivity(Intent(this, Login::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }

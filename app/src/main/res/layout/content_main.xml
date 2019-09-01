@@ -52,16 +52,16 @@
                 android:layout_marginLeft="10dp"
                 android:padding="13dp"
                 android:id="@+id/saveButton"/>
-        <Button
-                android:text="Go To List"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:layout_marginRight="10dp"
-                android:drawableEnd="@android:drawable/ic_menu_agenda"
-                android:background="@drawable/rounded_corner_blue"
-                android:id="@+id/listButton"
-                android:padding="15dp"
-                android:layout_alignParentRight="true"
-                android:textColor="@color/common_google_signin_btn_text_dark_default"/>
+<!--        <Button-->
+<!--                android:text="Go To List"-->
+<!--                android:layout_width="60dp"-->
+<!--                android:layout_height="60dp"-->
+<!--                android:layout_marginRight="10dp"-->
+<!--                android:drawableEnd="@android:drawable/ic_menu_agenda"-->
+<!--                android:background="@drawable/rounded_corner_blue"-->
+<!--                android:id="@+id/listButton"-->
+<!--                android:padding="15dp"-->
+<!--                android:layout_alignParentRight="true"-->
+<!--                android:textColor="@color/common_google_signin_btn_text_dark_default"/>-->
     </RelativeLayout>
 </RelativeLayout>
