@@ -2,22 +2,19 @@ package com.example.myjournal
 
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.util.Log
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.LinearLayout.LayoutParams
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import kotlinx.android.synthetic.main.login_main.view.*
 
 class DisplayJournalEntry: AppCompatActivity() {
     val TAG = "DisplayJournalEntry"
@@ -34,6 +31,8 @@ class DisplayJournalEntry: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.display_entry)
+        val toolbar: Toolbar = findViewById(R.id.toolbar)
+        setSupportActionBar(toolbar)
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         builder = AlertDialog.Builder(this)
