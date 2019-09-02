@@ -141,6 +141,7 @@ class DisplayJournalEntry: AppCompatActivity() {
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
+        menu.removeItem(R.id.search)
         return true
     }
 

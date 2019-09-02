@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
+import android.widget.EditText
 import android.widget.ListView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -74,6 +76,9 @@ class JournalList: AppCompatActivity() {
                 true
             }
             R.id.search -> {
+                val sBox = findViewById<EditText>(R.id.search_box)
+                sBox.visibility = View.VISIBLE
+                sBox.requestFocus()
                 true
             }
             R.id.logout -> {

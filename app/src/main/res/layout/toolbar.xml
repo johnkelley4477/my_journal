@@ -7,5 +7,12 @@
         android:layout_marginBottom="15dp"
         android:elevation="10dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark">
+    <EditText
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/search_box"
+            android:visibility="gone"
+            android:backgroundTint="@color/cardview_light_background"
+            android:hint="search"/>
 
 </androidx.appcompat.widget.Toolbar>
