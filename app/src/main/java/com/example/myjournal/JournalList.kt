@@ -84,4 +84,36 @@ class JournalList: AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
+
+    fun searchFor(value: String){
+        val isSingleDate: Boolean = value.substring(1,2) == "/" || value.substring(1,2) == "-"
+        val isDoubleDate: Boolean = value.substring(2,3) == "/" || value.substring(2,3) == "-"
+
+        if(isSingleDate || isDoubleDate){
+            // Is a Date
+            dateSearch(value.replace("/","-"))
+        }else{
+            //Is a tag
+        }
+    }
+
+    fun dateSearch(date: String){
+        val dateArray = date.split("-")
+        val mon = if(dateArray[0].length == 1) "0${dateArray[0]}" else dateArray[0]
+        val day = if(dateArray[1].length == 1) "0${dateArray[1]}" else dateArray[1]
+        val year = if(dateArray[2].length == 2) "20${dateArray[2]}" else dateArray[2]
+        val dateRef = ref.orderByChild("date").startAt("$year-$mon-$day")
+        dateRef.addValueEventListener(object : ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDataChange(p0: DataSnapshot) {
+                for(j in p0.children) {
+                    Log.d(TAG, "key is: ${j.value}")
+                }
+            }
+        })
+
+    }
 }
