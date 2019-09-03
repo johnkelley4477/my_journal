@@ -11,8 +11,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/search_box"
+            android:inputType="textAutoComplete"
             android:visibility="gone"
             android:backgroundTint="@color/cardview_light_background"
-            android:hint="search"/>
+            android:hint="Filter by date or tags"/>
 
 </androidx.appcompat.widget.Toolbar>
