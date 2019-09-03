@@ -21,10 +21,12 @@ import com.google.firebase.database.*
 class JournalList: AppCompatActivity() {
 
     lateinit var ref: DatabaseReference
+    lateinit var refTags: DatabaseReference
     lateinit var journalEntryList: MutableList<JournalEntry>
     lateinit var listView: ListView
     lateinit var auth: FirebaseAuth
     lateinit var sBox: EditText
+    lateinit var tagList: MutableList<Tags>
     val TAG: String = "JournalList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -53,6 +55,21 @@ class JournalList: AppCompatActivity() {
                     true
                 }
                 false
+            })
+
+            refTags = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/tags")
+            tagList = mutableListOf()
+            refTags.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for (t in p0.children) {
+                        var tag = t.getValue(Tags::class.java)
+                        tagList.add(tag!!)
+                    }
+                }
             })
         }else{
             Log.e(TAG,"no data")
@@ -159,7 +176,9 @@ class JournalList: AppCompatActivity() {
             if(journalEntryList.size < 1){
                 Toast.makeText(this,"Sorry no records found for $searchTerm",Toast.LENGTH_LONG).show()
             }
-            val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryList)
+            auth = FirebaseAuth.getInstance()
+            val currentUser = auth.currentUser
+            val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryList, tagList)
             listView.adapter = adapter
             listView.setOnItemClickListener{adapterView, view, position: Int, id: Long ->
                 var intent = Intent(this@JournalList, DisplayJournalEntry::class.java)

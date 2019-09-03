@@ -11,7 +11,7 @@ import java.util.*
 class Entry() {
 
     fun saveEntry(tagsTextName: EditText, entryTextName:EditText, context: Context,currentUser: String){
-        val dateString = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date()) //dateTextName.text.toString().trim()
+        val dateString = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
         val tag = tagsTextName.text.toString().trim()
         val entry = entryTextName.text.toString().trim()
         val tags = if(tag.isEmpty()) null else tag.split(" ")
@@ -29,6 +29,18 @@ class Entry() {
         toast.show()
         tagsTextName.setText("")
         entryTextName.setText("")
+    }
+
+    fun saveTags(tagsTextName: String, context: Context, currentUser: String){
+        val tag = tagsTextName.trim()
+        val ref = FirebaseDatabase.getInstance().getReference("$currentUser/tags")
+        val id = ref.push().key
+        val tags = Tags(id!!,"#FFFFFF","#000000",tag)
+
+        ref.child(id).setValue(tags)
+        val toast = Toast.makeText(context,"Your Journal Entry has been saved", Toast.LENGTH_LONG)
+        toast.show()
+
     }
 
     private fun getISODate(stringDate: String):String{
