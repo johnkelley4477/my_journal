@@ -35,7 +35,7 @@ class Entry() {
         val tag = tagsTextName.trim()
         val ref = FirebaseDatabase.getInstance().getReference("$currentUser/tags")
         val id = ref.push().key
-        val tags = Tags(id!!,"#FFFFFF","#000000",tag)
+        val tags = Tags(id!!,"#FFFFFF","#000000","#000000",tag)
 
         ref.child(id).setValue(tags)
         val toast = Toast.makeText(context,"Your Journal Entry has been saved", Toast.LENGTH_LONG)
