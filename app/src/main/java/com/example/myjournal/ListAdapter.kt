@@ -57,6 +57,7 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
                 drawableBackground.setStroke(3, Color.parseColor(tagObject.borderColor))
                 drawableBackground.setColor(Color.parseColor(tagObject.innerColor))
                 textView.background = drawableBackground
+                textView.text.setTextColor(Color.parseColor(tagObject.textColor))
             }
             textView.layoutParams = layoutParamss
             textView.text = tag
