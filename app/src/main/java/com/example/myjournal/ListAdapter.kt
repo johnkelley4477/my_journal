@@ -56,7 +56,7 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
             }
             textView.layoutParams = layoutParamss
             textView.text = tag
-            textView.textSize = 12F
+            textView.textSize = 18F
             tagLayout?.addView(tagView)
         }
         return view
