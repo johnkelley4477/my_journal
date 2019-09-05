@@ -10,9 +10,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.google.firebase.auth.FirebaseAuth
@@ -25,15 +23,17 @@ class JournalList: AppCompatActivity() {
     lateinit var journalEntryList: MutableList<JournalEntry>
     lateinit var listView: ListView
     lateinit var auth: FirebaseAuth
-    lateinit var sBox: EditText
+    lateinit var sBox: AutoCompleteTextView
     lateinit var tagList: MutableList<Tags>
+    lateinit var tagArray: Array<String>
     val TAG: String = "JournalList"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.lists_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        sBox = findViewById<EditText>(R.id.search_box)
+        sBox = findViewById(R.id.search_box)
+
         setSupportActionBar(toolbar)
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
@@ -65,9 +65,27 @@ class JournalList: AppCompatActivity() {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
+                    var i = 0
+                    val tagCount = p0.getChildrenCount()
+                    var tagArray = arrayOfNulls<String>(tagCount.toInt())
                     for (t in p0.children) {
                         var tag = t.getValue(Tags::class.java)
                         tagList.add(tag!!)
+                        tagArray.set(i,tag.tag)
+                        ++i
+                    }
+                    val adapter = ArrayAdapter<String>(
+                        this@JournalList,
+                        android.R.layout.simple_dropdown_item_1line,
+                        tagArray
+                    )
+                    sBox.setAdapter(adapter)
+                    Log.d(TAG,"tagList $adapter")
+                    sBox.threshold = 1
+                    sBox.onItemClickListener = AdapterView.OnItemClickListener{
+                            parent,view,position,id->
+                        val selectedItem = parent.getItemAtPosition(position).toString()
+                        tagSearch(selectedItem)
                     }
                 }
             })
