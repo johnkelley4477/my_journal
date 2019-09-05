@@ -138,7 +138,7 @@ class DisplayJournalEntry: AppCompatActivity() {
                 editTextEntry.requestFocus()
                 return@setPositiveButton
             }
-            val journalEntry = JournalEntry(map.get("id").toString(),map.get("date").toString(),entry,tags)
+            val journalEntry = JournalEntry(map.get("id").toString(),map.get("date").toString(),entry,tags,map.get("timeStamp")!!.toLong())
             fdb.child(map.get("id").toString()).setValue(journalEntry)
 
             Toast.makeText(this,"Our journal entry has been updated",Toast.LENGTH_LONG).show()

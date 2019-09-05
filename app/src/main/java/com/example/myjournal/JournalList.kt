@@ -41,7 +41,7 @@ class JournalList: AppCompatActivity() {
             journalEntryList = mutableListOf()
             listView = findViewById(R.id.j_list)
             ref = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/entry")
-            ref.addValueEventListener(object : ValueEventListener {
+            ref.orderByChild("timeStamp").limitToLast(10).addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
@@ -184,11 +184,12 @@ class JournalList: AppCompatActivity() {
             if(journalEntryList.size < 1){
                 Toast.makeText(this,"Sorry no records found for $searchTerm",Toast.LENGTH_LONG).show()
             }
-            val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryList, tagList)
+            val journalEntryListReversed = journalEntryList.asReversed()
+            val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryListReversed, tagList)
             listView.adapter = adapter
             listView.setOnItemClickListener{adapterView, view, position: Int, id: Long ->
                 var intent = Intent(this@JournalList, DisplayJournalEntry::class.java)
-                intent.putExtra("id",journalEntryList[position].id)
+                intent.putExtra("id",journalEntryListReversed[position].id)
                 startActivity(intent)
             }
         }

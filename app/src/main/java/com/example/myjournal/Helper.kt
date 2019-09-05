@@ -37,7 +37,7 @@ class Helper{
         }
 
         builder.setPositiveButton("Update") {p0,P1 ->
-            val journalEntry = JournalEntry(map.get("id").toString(),map.get("date").toString(),entry,tags)
+            val journalEntry = JournalEntry(map.get("id").toString(),map.get("date").toString(),entry,tags,map.get("timeStamp")!!.toLong())
             val fab = fdb.child(map.get("id").toString()).setValue(journalEntry)
             Log.d(TAG,"result: $fab")
             Toast.makeText(context,"Our journal entry has been updated", Toast.LENGTH_LONG).show()

@@ -4,9 +4,10 @@ class JournalEntry (
     val id: String,
     val date: String,
     val entry: String,
-    val tags: List<String>?
+    val tags: List<String>?,
+    val timeStamp: Long
 ){
-    constructor(): this("","","",null)
+    constructor(): this("","","",null,0)
 
 
 }

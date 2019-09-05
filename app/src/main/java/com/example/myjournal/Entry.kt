@@ -12,6 +12,7 @@ class Entry() {
 
     fun saveEntry(tagsTextName: EditText, entryTextName:EditText, context: Context,currentUser: String){
         val dateString = SimpleDateFormat("yyyyMMdd_HHmmss").format(Date())
+        val dateLong = Date().time
         val tag = tagsTextName.text.toString().trim()
         val entry = entryTextName.text.toString().trim()
         val tags = if(tag.isEmpty()) null else tag.split(" ")
@@ -22,7 +23,7 @@ class Entry() {
         }
         val ref = FirebaseDatabase.getInstance().getReference("$currentUser/entry")
         val id = ref.push().key
-        val journalEntry = JournalEntry(id!!,getISODate(dateString),entry,tags)
+        val journalEntry = JournalEntry(id!!,getISODate(dateString),entry,tags,dateLong)
 
         ref.child(id).setValue(journalEntry)
         val toast = Toast.makeText(context,"Your Journal Entry has been saved", Toast.LENGTH_LONG)
