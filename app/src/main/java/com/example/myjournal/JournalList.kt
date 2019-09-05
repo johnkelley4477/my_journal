@@ -41,7 +41,7 @@ class JournalList: AppCompatActivity() {
             journalEntryList = mutableListOf()
             listView = findViewById(R.id.j_list)
             ref = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/entry")
-            ref.orderByChild("timeStamp").limitToLast(10).addValueEventListener(object : ValueEventListener {
+            ref.orderByChild("timeStamp").addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                 }
