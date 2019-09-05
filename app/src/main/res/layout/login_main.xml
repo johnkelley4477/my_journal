@@ -1,35 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="match_parent"
+        android:background="@drawable/mountmobile"
         tools:context=".Login">
+    <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="#FFFFFF"
+            android:alpha="0.75"
+            android:padding="20dp"
+            android:layout_centerInParent="true">
+        <TextView
+                android:text="Please Login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" android:id="@+id/textView"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" android:textAlignment="center"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:ems="10"
+                android:id="@+id/userText" android:hint="Username" android:textAlignment="center"/>
+        <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPassword"
+                android:ems="10"
+                android:id="@+id/passwordText" android:textAlignment="center" android:hint="Password"/>
+        <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="20dp">
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="30dp"
+                    android:background="@drawable/rounded_corner_green"
+                    android:layout_alignParentLeft="true"
+                    android:drawableStart="@drawable/ic_person"
+                    android:id="@+id/loginButton"/>
 
-    <TextView
-            android:text="Please Login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/textView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large" android:textAlignment="center"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:ems="10"
-            android:id="@+id/userText" android:hint="Username" android:textAlignment="center"/>
-    <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:ems="10"
-            android:id="@+id/passwordText" android:textAlignment="center" android:hint="Password"/>
-    <Button
-            android:text="Login"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/loginButton"/>
-    <Button
-            android:text="Register"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:id="@+id/loginRegisterButton"/>
-</LinearLayout>
+            <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingStart="30dp"
+                    android:background="@drawable/rounded_corner_blue"
+                    android:layout_alignParentRight="true"
+                    android:drawableStart="@drawable/ic_person_add"
+                    android:id="@+id/loginRegisterButton"/>
+        </RelativeLayout>
+    </LinearLayout>
+</RelativeLayout>
