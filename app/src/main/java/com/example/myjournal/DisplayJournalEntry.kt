@@ -2,6 +2,8 @@ package com.example.myjournal
 
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.GradientDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,6 +43,7 @@ class DisplayJournalEntry: AppCompatActivity() {
         inflater = LayoutInflater.from(this)
         if(currentUser != null) {
             val id = intent.getStringExtra("id")
+
             var map: HashMap<String, String> = hashMapOf()
 
             fdb = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/entry")
@@ -50,6 +53,7 @@ class DisplayJournalEntry: AppCompatActivity() {
                 }
 
                 override fun onDataChange(p0: DataSnapshot) {
+                    val helper = Helper()
                     for(j in p0.children){
                         map.set(j.key.toString(),j.value.toString())
                     }
@@ -64,7 +68,7 @@ class DisplayJournalEntry: AppCompatActivity() {
                     delete.setOnClickListener{
                         showDeleteDialog(map)
                     }
-                    date.text = getFormatedDate(map.get("date")!!) + " " + getFormatedTime(map.get("date")!!)
+                    date.text = helper.getFormatedDate(map.get("date")!!) + " " + helper.getFormatedTime(map.get("date")!!)
                     //tags.text = map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).replace(",", "")
                     entry.text = map.get("entry")!!
                     var i = 0
@@ -79,6 +83,12 @@ class DisplayJournalEntry: AppCompatActivity() {
                         layoutParamss.setMargins(10,10,10,10)
                         //textView.background = Drawable.(R.drawable.rounded_corner_green)
                         textView.layoutParams = layoutParamss
+//                        var drawableBackground = GradientDrawable()
+//                        drawableBackground.cornerRadius = 50F
+//                        drawableBackground.setStroke(7, Color.parseColor(map.get("borderColor")))
+//                        drawableBackground.setColor(Color.parseColor(map.get("innerColor")))
+//                        textView.background = drawableBackground
+//                        textView.setTextColor(Color.parseColor(map.get("textColor")))
                         textView.text = tag
                         tagLayout?.addView(view)
                         ++i
@@ -129,8 +139,7 @@ class DisplayJournalEntry: AppCompatActivity() {
                 return@setPositiveButton
             }
             val journalEntry = JournalEntry(map.get("id").toString(),map.get("date").toString(),entry,tags)
-            val fab = fdb.child(map.get("id").toString()).setValue(journalEntry)
-            Log.d(TAG,"test id ${fab}")
+            fdb.child(map.get("id").toString()).setValue(journalEntry)
 
             Toast.makeText(this,"Our journal entry has been updated",Toast.LENGTH_LONG).show()
         }
@@ -159,28 +168,15 @@ class DisplayJournalEntry: AppCompatActivity() {
                 startActivity(Intent(this, Login::class.java))
                 true
             }
+            R.id.tag_manager -> {
+                startActivity(Intent(this, TagList::class.java))
+                true
+            }
+            R.id.new_entry ->{
+                startActivity(Intent(this, MainActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    //ToDo create a helper class with these
-    fun getFormatedDate(date: String): String{
-        if(!date.isEmpty()){
-            val year = date.substring(0,4)
-            val mon = date.substring(5,7)
-            val day = date.substring(8,10)
-
-            return "$mon/$day/$year"
-        }else{
-            return ""
-        }
-    }
-
-    fun getFormatedTime(time: String): String{
-        if(!time.isEmpty()){
-            return time.substring(11)
-        }else{
-            return ""
         }
     }
 }

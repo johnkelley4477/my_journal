@@ -10,10 +10,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.google.firebase.auth.FirebaseUser
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
 
 class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List<JournalEntry>,val tagList: MutableList<Tags>): ArrayAdapter<JournalEntry>(mCtx,layoutResId,journalList) {
     val TAG: String = "ListAdapter"
@@ -43,7 +39,7 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
                 LinearLayout.LayoutParams.WRAP_CONTENT // This will define text view height
             )
             layoutParamss.setMargins(10, 10, 10, 10)
-            var tagObject: Tags = Tags("","","","")
+            var tagObject: Tags = Tags("","","","","")
             for(tagItem in tagList){
                 if(tagItem.tag.equals(tag)){
                     tagObject = tagItem
@@ -53,11 +49,10 @@ class ListAdapter(val mCtx: Context, val layoutResId: Int, val journalList: List
             if(!tagObject.tag.isBlank()) {
                 var drawableBackground: GradientDrawable = GradientDrawable()
                 drawableBackground.cornerRadius = 50F
-                Log.d(TAG,"borderColor : ${tagObject.borderColor} innerColor: ${tagObject.innerColor}")
-                drawableBackground.setStroke(3, Color.parseColor(tagObject.borderColor))
+                drawableBackground.setStroke(7, Color.parseColor(tagObject.borderColor))
                 drawableBackground.setColor(Color.parseColor(tagObject.innerColor))
                 textView.background = drawableBackground
-                textView.text.setTextColor(Color.parseColor(tagObject.textColor))
+                textView.setTextColor(Color.parseColor(tagObject.textColor))
             }
             textView.layoutParams = layoutParamss
             textView.text = tag

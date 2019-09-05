@@ -1,6 +1,7 @@
 package com.example.myjournal
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.Menu
@@ -23,15 +24,16 @@ class MainActivity : AppCompatActivity() {
     lateinit var entryTextName: EditText
     lateinit var saveButton: Button
     lateinit var currentUserId: String
+    lateinit var helper: Helper
     val TAG: String = "Main"
     private lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.content_main)
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
-
+        helper = Helper()
         auth = FirebaseAuth.getInstance()
         val currentUser = auth.currentUser
         if(currentUser != null) {
@@ -89,6 +91,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         menu.removeItem(R.id.search)
+        menu.removeItem(R.id.new_entry)
         return true
     }
 
@@ -99,12 +102,19 @@ class MainActivity : AppCompatActivity() {
                 true
             }
             R.id.search -> {
-
                 true
             }
             R.id.logout -> {
                 auth.signOut()
                 startActivity(Intent(this, Login::class.java))
+                true
+            }
+            R.id.tag_manager -> {
+                startActivity(Intent(this, TagList::class.java))
+                true
+            }
+            R.id.new_entry ->{
+                startActivity(Intent(this, MainActivity::class.java))
                 true
             }
             else -> super.onOptionsItemSelected(item)

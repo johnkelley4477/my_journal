@@ -6,9 +6,9 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".MainActivity">
-    <include layout="@layout/toolbar"
-            android:id="@+id/toolbar"/>
-    <include layout="@layout/content_main"
-             android:id="@+id/entryView"
-             android:visibility="visible"/>
+<!--    <include layout="@layout/toolbar"-->
+<!--            android:id="@+id/toolbar"/>-->
+<!--    <include layout="@layout/content_main"-->
+<!--             android:id="@+id/entryView"-->
+<!--             android:visibility="visible"/>-->
 </LinearLayout>

@@ -2,6 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
+        android:background="@drawable/mountmobile"
         android:layout_height="match_parent">
     <include layout="@layout/toolbar"
             android:id="@+id/toolbar"/>
@@ -10,6 +11,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/textViews"
+            android:background="#FFFFFF"
+            android:alpha="0.75"
             android:layout_marginTop="60dp">
         <TextView
                 android:id="@+id/textShowDate"
@@ -47,11 +50,11 @@
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_alignParentLeft="true"
-                android:padding="15dp"
+                android:padding="17dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#0000ff"
                 android:background="@drawable/rounded_corner_green"
-                android:drawableEnd="@android:drawable/ic_menu_add"
+                android:drawableEnd="@drawable/ic_system_update"
                 android:id="@+id/updateButton"/>
         <TextView
                 android:layout_width="60dp"

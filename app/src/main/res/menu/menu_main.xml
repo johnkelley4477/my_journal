@@ -12,6 +12,14 @@
             android:title="Search"
             android:orderInCategory="100"
             app:showAsAction="always"/>
+    <item android:id="@+id/new_entry"
+            android:title="New Entry"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
+    <item android:id="@+id/tag_manager"
+            android:title="Tag Manager"
+            android:orderInCategory="100"
+            app:showAsAction="never"/>
     <item android:id="@+id/logout"
             android:title="Logout"
             android:orderInCategory="100"

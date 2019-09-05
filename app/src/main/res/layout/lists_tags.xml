@@ -4,12 +4,12 @@
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               tools:context=".JournalList"
-            android:background="@drawable/mountmobile"
+        android:background="@drawable/mountmobile"
               android:id="@+id/list_main">
     <include layout="@layout/toolbar"
             android:id="@+id/toolbar"/>
     <ListView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:id="@+id/j_list"/>
+            android:id="@+id/t_list"/>
 </LinearLayout>

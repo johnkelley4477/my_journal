@@ -106,6 +106,14 @@ class JournalList: AppCompatActivity() {
                 startActivity(Intent(this, Login::class.java))
                 true
             }
+            R.id.tag_manager -> {
+                startActivity(Intent(this, TagList::class.java))
+                true
+            }
+            R.id.new_entry ->{
+                startActivity(Intent(this, MainActivity::class.java))
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
@@ -176,8 +184,6 @@ class JournalList: AppCompatActivity() {
             if(journalEntryList.size < 1){
                 Toast.makeText(this,"Sorry no records found for $searchTerm",Toast.LENGTH_LONG).show()
             }
-            auth = FirebaseAuth.getInstance()
-            val currentUser = auth.currentUser
             val adapter = ListAdapter(this@JournalList, R.layout.journal_entry, journalEntryList, tagList)
             listView.adapter = adapter
             listView.setOnItemClickListener{adapterView, view, position: Int, id: Long ->
