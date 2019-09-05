@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
+import android.nfc.Tag
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -29,6 +30,8 @@ class DisplayJournalEntry: AppCompatActivity() {
     lateinit var delete: TextView
     lateinit var auth: FirebaseAuth
     lateinit var fdb: DatabaseReference
+    lateinit var ref: DatabaseReference
+    lateinit var tagList: MutableList<Tags>
     lateinit var builder: AlertDialog.Builder
     lateinit var inflater: LayoutInflater
 
@@ -43,8 +46,23 @@ class DisplayJournalEntry: AppCompatActivity() {
         inflater = LayoutInflater.from(this)
         if(currentUser != null) {
             val id = intent.getStringExtra("id")
-
             var map: HashMap<String, String> = hashMapOf()
+            ref = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/tags")
+            tagList = mutableListOf()
+            ref.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                }
+
+                override fun onDataChange(p0: DataSnapshot) {
+                    for(t in p0.children) {
+                        if(t.exists()) {
+                            var tag = t.getValue(Tags::class.java)
+                            tagList.add(tag!!)
+                        }
+                    }
+                }
+            })
 
             fdb = FirebaseDatabase.getInstance().getReference("${currentUser.uid}/entry")
             fdb.child(id).addValueEventListener(object : ValueEventListener {
@@ -62,6 +80,7 @@ class DisplayJournalEntry: AppCompatActivity() {
                     update = findViewById(R.id.updateButton)
                     delete = findViewById(R.id.deleteButton)
                     var tagLayout = findViewById<LinearLayout>(R.id.tagsLayout)
+                    tagLayout.removeAllViewsInLayout()
                     update.setOnClickListener{
                         showUpdateDialog(map)
                     }
@@ -69,10 +88,9 @@ class DisplayJournalEntry: AppCompatActivity() {
                         showDeleteDialog(map)
                     }
                     date.text = helper.getFormatedDate(map.get("date")!!) + " " + helper.getFormatedTime(map.get("date")!!)
-                    //tags.text = map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).replace(",", "")
                     entry.text = map.get("entry")!!
-                    var i = 0
                     for(tag in map.get("tags")!!.substring(1, map.get("tags")!!.length - 1).split(",")){
+
                         val layoutInflater: LayoutInflater = LayoutInflater.from(this@DisplayJournalEntry)
                         var view: View = layoutInflater.inflate(R.layout.tag_text, null)
                         val textView = view.findViewById<TextView>(R.id.tag_text)
@@ -81,17 +99,19 @@ class DisplayJournalEntry: AppCompatActivity() {
                             LayoutParams.WRAP_CONTENT // This will define text view height
                         )
                         layoutParamss.setMargins(10,10,10,10)
-                        //textView.background = Drawable.(R.drawable.rounded_corner_green)
                         textView.layoutParams = layoutParamss
-//                        var drawableBackground = GradientDrawable()
-//                        drawableBackground.cornerRadius = 50F
-//                        drawableBackground.setStroke(7, Color.parseColor(map.get("borderColor")))
-//                        drawableBackground.setColor(Color.parseColor(map.get("innerColor")))
-//                        textView.background = drawableBackground
-//                        textView.setTextColor(Color.parseColor(map.get("textColor")))
+                        for(t in tagList) {
+                            if(tag.trim().equals(t.tag)) {
+                                var drawableBackground = GradientDrawable()
+                                drawableBackground.cornerRadius = 50F
+                                drawableBackground.setStroke(7, Color.parseColor(t.borderColor))
+                                drawableBackground.setColor(Color.parseColor(t.innerColor))
+                                textView.background = drawableBackground
+                                textView.setTextColor(Color.parseColor(t.textColor))
+                            }
+                        }
                         textView.text = tag
                         tagLayout?.addView(view)
-                        ++i
                     }
                 }
             })
