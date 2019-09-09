@@ -13,7 +13,7 @@
             android:id="@+id/textViews"
             android:background="#FFFFFF"
             android:layout_centerInParent="true"
-            android:alpha="0.75"
+            android:alpha="0.85"
             android:layout_marginTop="60dp"
             android:padding="20dp">
         <TextView
