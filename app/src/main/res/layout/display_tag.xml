@@ -2,6 +2,7 @@
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
+        android:background="@drawable/mountmobile"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     <include layout="@layout/toolbar"
@@ -19,6 +20,7 @@
     <LinearLayout
             android:layout_width="match_parent"
             android:padding="20dp"
+            android:alpha="0.85"
             android:layout_weight="0.5"
             android:orientation="vertical"
             android:gravity="center"
